@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout with Flexbox & Grid</title>
+    <style>
+        /* CSS Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2c3e50;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Navigation - Using Flexbox */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Main Layout - Using CSS Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 3fr 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-widget {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-widget h3 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-section {
+            margin-bottom: 2rem;
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Card Container - Using Flexbox */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .card {
+            flex: 1 1 300px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            height: 180px;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h3 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1 1 250px;
+        }
+
+        .footer-section h3 {
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Media Queries for Responsiveness */
+        
+        /* Tablet Styles */
+        @media (max-width: 992px) {
+            .main-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+            
+            .right-sidebar {
+                grid-column: 1 / -1;
+                display: flex;
+                gap: 1.5rem;
+            }
+            
+            .right-sidebar .sidebar-widget {
+                flex: 1 1 50%;
+            }
+            
+            .card-container {
+                gap: 1rem;
+            }
+            
+            .card {
+                flex: 1 1 calc(50% - 1rem);
+            }
+        }
+
+        /* Larger Mobile Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-sidebar {
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+            
+            .right-sidebar {
+                order: 3;
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 576px) {
+            .card {
+                flex: 1 1 100%;
+            }
+            
+            .right-sidebar .sidebar-widget {
+                flex: 1 1 100%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                display: block;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">LayoutMaster</div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area with Grid -->
+    <main class="container main-grid">
+        <!-- Left Sidebar -->
+        <aside class="sidebar left-sidebar">
+            <div class="sidebar-widget">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Web Design</a></li>
+                    <li><a href="#">Development</a></li>
+                    <li><a href="#">Graphic Design</a></li>
+                    <li><a href="#">UX/UI</a></li>
+                    <li><a href="#">Marketing</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-widget">
+                <h3>Latest News</h3>
+                <p>Stay updated with the latest web trends and technologies.</p>
+                <a href="#" class="read-more">Read More &rarr;</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <section class="content-section">
+                <h2>Welcome to Our Website</h2>
+                <p>We create responsive, modern layouts using the latest CSS techniques including Flexbox and Grid. Explore how we combine these layout models to create visually appealing and functional designs.</p>
+            </section>
+
+            <section class="content-section">
+                <h2>Our Services</h2>
+                <!-- Card Container using Flexbox -->
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-img">Web Design</div>
+                        <div class="card-content">
+                            <h3>Responsive Design</h3>
+                            <p>Creating layouts that work on all device sizes from mobile to desktop.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">Development</div>
+                        <div class="card-content">
+                            <h3>Frontend Development</h3>
+                            <p>Building interactive user interfaces with modern JavaScript frameworks.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-img">UX/UI</div>
+                        <div class="card-content">
+                            <h3>User Experience</h3>
+                            <p>Designing intuitive interfaces that provide exceptional user experiences.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar right-sidebar">
+            <div class="sidebar-widget">
+                <h3>Latest Projects</h3>
+                <p>Check out our recently completed projects showcasing responsive design principles.</p>
+                <a href="#" class="read-more">View Portfolio &rarr;</a>
+            </div>
+            <div class="sidebar-widget">
+                <h3>Subscribe</h3>
+                <p>Subscribe to our newsletter for updates on web design trends and techniques.</p>
+                <form>
+                    <input type="email" placeholder="Your email" style="width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+                    <button type="submit" style="background: #e74c3c; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; width: 100%;">Subscribe</button>
+                </form>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>We specialize in creating responsive websites using modern CSS techniques like Flexbox and Grid.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@layoutmaster.com</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Address: 123 Web Design Street, CSS City</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 LayoutMaster. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
